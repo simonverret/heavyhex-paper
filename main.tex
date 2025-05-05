@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage[paperwidth=8.5in, paperheight=11in, margin=0.5in]{geometry}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{tikzpicture}[scale=1]
+
+\def\dotspacing{0.6} % adjust spacing here
+\def\nx{30} % number of columns
+\def\ny{48} % number of rows
+
+% Heavy hex pattern
+\foreach \x in {0,...,\nx} {
+  \foreach \y in {0,...,\ny} {
+    \pgfmathtruncatemacro{\moduloX}{mod(\x,4)}
+    \pgfmathtruncatemacro{\moduloY}{mod(\y,4)}
+    \ifnum\moduloY=0
+      \filldraw[black] (\x*\dotspacing, \y*\dotspacing*0.866) circle (0.5pt);
+    \else
+      \ifnum\moduloX=0
+        \ifnum\moduloY=1
+          \filldraw[black] (\x*\dotspacing, \y*\dotspacing*0.866) circle (0.5pt);
+        \fi
+      \fi
+      \ifnum\moduloX=2
+        \ifnum\moduloY=3
+          \filldraw[black] (\x*\dotspacing, \y*\dotspacing*0.866) circle (0.5pt);
+        \fi
+      \fi
+    \fi
+    \ifnum\moduloY=2
+      \filldraw[black] (\x*\dotspacing, \y*\dotspacing*0.866) circle (0.5pt);
+    \fi
+  }
+}
+
+\end{tikzpicture}
+\end{document}
